@@ -1,0 +1,51 @@
+from db import db
+
+class Player(db.Model):
+    __tablename__ = "players"
+    id = db.Column(db.String(32), primary_key=True)
+    name = db.Column(db.String(64), nullable=False)
+    age = db.Column(db.Integer, nullable=False)
+    picture = db.Column(db.String(64), nullable=False)
+    position = db.Column(db.String(64), nullable=False)
+    team_id = db.Column(db.String(32), db.ForeignKey("teams.id"), nullable=False)
+    games = db.Column(db.Integer, nullable=False)
+    games_started = db.Column(db.Integer, nullable=False)
+    minutes_played = db.Column(db.Integer, nullable=False)
+    field_goals = db.Column(db.Integer, nullable=False)
+    field_goal_attempts = db.Column(db.Integer, nullable=False)
+    field_goal_percentage = db.Column(db.Float, nullable=False)
+    three_pointers = db.Column(db.Integer, nullable=False)
+    three_point_attempts = db.Column(db.Integer, nullable=False)
+    three_point_percentage = db.Column(db.Float, nullable=False)
+    two_pointers = db.Column(db.Integer, nullable=False)
+    two_point_attempts = db.Column(db.Integer, nullable=False)
+    two_point_percentage = db.Column(db.Float, nullable=False)
+    effective_field_goal_percentage = db.Column(db.Float, nullable=False)
+    free_throws = db.Column(db.Integer, nullable=False)
+    free_throw_attempts = db.Column(db.Integer, nullable=False)
+    free_throw_percentage = db.Column(db.Float, nullable=False)
+    offensive_rebounds = db.Column(db.Integer, nullable=False)
+    defensive_rebounds = db.Column(db.Integer, nullable=False)
+    total_rebounds = db.Column(db.Integer, nullable=False)
+    assists = db.Column(db.Integer, nullable=False)
+    steals = db.Column(db.Integer, nullable=False)
+    blocks = db.Column(db.Integer, nullable=False)
+    turnovers = db.Column(db.Integer, nullable=False)
+    personal_fouls = db.Column(db.Integer, nullable=False)
+    points = db.Column(db.Integer, nullable=False)
+    player_efficiency_rating = db.Column(db.Float, nullable=False)
+    true_shooting_percentage = db.Column(db.Float, nullable=False)
+    three_point_attempt_rate = db.Column(db.Float, nullable=False)
+    free_throw_attempt_rate = db.Column(db.Float, nullable=False)
+    offensive_rebound_percentage = db.Column(db.Float, nullable=False)
+    defensive_rebound_percentage = db.Column(db.Float, nullable=False)
+    total_rebound_percentage = db.Column(db.Float, nullable=False)
+    assist_percentage = db.Column(db.Float, nullable=False)
+    steal_percentage = db.Column(db.Float, nullable=False)
+    block_percentage = db.Column(db.Float, nullable=False)
+    turnover_percentage = db.Column(db.Float, nullable=False)
+
+
+
+    def __repr__(self):
+        return f"<Player {self.name}>"
