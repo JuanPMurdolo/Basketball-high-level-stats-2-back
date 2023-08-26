@@ -34,5 +34,6 @@ class Games(MethodView):
     def post(self, game_data):
         game_id = uuid.uuid4().hex
         game = {**game_data, "id": game_id}
-        games[game_id] = game        
+        games[game_id] = game
         return game
+    

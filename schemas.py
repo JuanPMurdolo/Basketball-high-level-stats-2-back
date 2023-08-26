@@ -64,7 +64,9 @@ class GameSchema(Schema):
     status = fields.Str()
     postseason = fields.Bool()
     local_players = fields.List(fields.Nested(PlayerSchema))
+    local_players_stats = fields.Dict()
     visitor_players = fields.List(fields.Nested(PlayerSchema))
+    visitor_players_stats = fields.Dict()
     local_team_stats = fields.Dict()
     visitor_team_stats = fields.Dict()
 
@@ -76,3 +78,6 @@ class TournamentSchema(Schema):
     games = fields.List(fields.Nested(GameSchema))
     season = fields.Str()
     season_type = fields.Str()
+
+class StatsSchema(Schema):
+    data = fields.Str()

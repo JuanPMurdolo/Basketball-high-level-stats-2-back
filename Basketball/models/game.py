@@ -16,8 +16,6 @@ class Game(db.Model):
     status = db.Column(db.String(32), nullable=False)
     post_season = db.Column(db.Boolean, nullable=False)
     home_team_wins = db.Column(db.Boolean, nullable=False)
-    home_team_losses = db.Column(db.Boolean, nullable=False)
     visitor_team_wins = db.Column(db.Boolean, nullable=False)
-    visitor_team_losses = db.Column(db.Boolean, nullable=False)
     local_team_stats = db.Column(db.JSON, nullable=False)
     visitor_team_stats = db.Column(db.JSON, nullable=False)

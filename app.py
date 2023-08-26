@@ -4,6 +4,8 @@ from Basketball.resources.Game import blp as games_blueprint
 from Basketball.resources.Team import blp as teams_blueprint
 from Basketball.resources.Tournament import blp as tournaments_blueprint
 from Basketball.resources.Player import blp as players_blueprint
+from Basketball.resources.stats import blp as stats_blueprint
+from Basketball.resources.funciones import *
 
 app = Flask(__name__)
 
@@ -20,3 +22,4 @@ api.register_blueprint(games_blueprint)
 api.register_blueprint(teams_blueprint)
 api.register_blueprint(tournaments_blueprint)
 api.register_blueprint(players_blueprint)
+api.register_blueprint(stats_blueprint)
