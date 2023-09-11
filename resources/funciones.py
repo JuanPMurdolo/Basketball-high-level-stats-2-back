@@ -179,3 +179,114 @@ def callAllFunctions(t2i, t3i, t1i, pp, puntos, tcc, t3c, tci, min, totales, t1c
     data += "OE: " + str(oe(tci, ro, asis, pp, tcc)) + "\n"
     data += "EPS: " + str(eps(puntos, oe(tci, ro, asis, pp, tcc))) + "\n"
     return data
+
+def sumarEstadisticas(game):
+    t2i = 0
+    t3i = 0
+    t1i = 0
+    pp = 0
+    puntos = 0
+    tcc = 0
+    t3c = 0
+    tci = 0
+    min = 0
+    totales = 0
+    t1c = 0
+    t2c = 0
+    t1p = 0
+    ro = 0
+    rd = 0
+    asis = 0
+    for lp in game.local_players_stats:
+        t2i = t2i + lp.field_goal_attempts
+        t3i = t3i + lp.three_point_attempts
+        t1i = t1i + lp.free_throw_attempts
+        pp = pp + lp.turnovers
+        puntos = puntos + lp.points
+        tcc = tcc + lp.field_goals
+        t3c = t3c + lp.three_pointers
+        tci = tci + lp.free_throws
+        min = min + lp.minutes_played
+        totales = totales + lp.total_rebounds
+        t1c = t1c + lp.free_throws
+        t2c = t2c + lp.two_pointers
+        t1p = t1p + lp.free_throw_percentage
+        ro = ro + lp.offensive_rebounds
+        rd = rd + lp.defensive_rebounds
+        asis = asis + lp.assists
+    
+    game.local_team_stats.field_goal_attempts = t2i
+    game.local_team_stats.three_point_attempts = t3i
+    game.local_team_stats.free_throw_attempts = t1i
+    game.local_team_stats.turnovers = pp
+    game.local_team_stats.points = puntos
+    game.local_team_stats.field_goals = tcc
+    game.local_team_stats.three_pointers = t3c
+    game.local_team_stats.free_throws = tci
+    game.local_team_stats.minutes_played = min
+    game.local_team_stats.total_rebounds = totales
+    game.local_team_stats.free_throws = t1c
+    game.local_team_stats.two_pointers = t2c
+    game.local_team_stats.free_throw_percentage = t1p
+    game.local_team_stats.offensive_rebounds = ro
+    game.local_team_stats.defensive_rebounds = rd
+    game.local_team_stats.assists = asis
+
+    t2i = 0
+    t3i = 0
+    t1i = 0
+    pp = 0
+    puntos = 0
+    tcc = 0
+    t3c = 0
+    tci = 0
+    min = 0
+    totales = 0
+    t1c = 0
+    t2c = 0
+    t1p = 0
+    ro = 0
+    rd = 0
+    asis = 0
+
+    for vp in game.visitor_players_stats:
+        t2i = t2i + vp.field_goal_attempts
+        t3i = t3i + vp.three_point_attempts
+        t1i = t1i + vp.free_throw_attempts
+        pp = pp + vp.turnovers
+        puntos = puntos + vp.points
+        tcc = tcc + vp.field_goals
+        t3c = t3c + vp.three_pointers
+        tci = tci + vp.free_throws
+        min = min + vp.minutes_played
+        totales = totales + vp.total_rebounds
+        t1c = t1c + vp.free_throws
+        t2c = t2c + vp.two_pointers
+        t1p = t1p + vp.free_throw_percentage
+        ro = ro + vp.offensive_rebounds
+        rd = rd + vp.defensive_rebounds
+        asis = asis + vp.assists
+
+    game.visitor_team_stats.field_goal_attempts = t2i
+    game.visitor_team_stats.three_point_attempts = t3i
+    game.visitor_team_stats.free_throw_attempts = t1i
+    game.visitor_team_stats.turnovers = pp
+    game.visitor_team_stats.points = puntos
+    game.visitor_team_stats.field_goals = tcc
+    game.visitor_team_stats.three_pointers = t3c
+    game.visitor_team_stats.free_throws = tci
+    game.visitor_team_stats.minutes_played = min
+    game.visitor_team_stats.total_rebounds = totales
+    game.visitor_team_stats.free_throws = t1c
+    game.visitor_team_stats.two_pointers = t2c
+    game.visitor_team_stats.free_throw_percentage = t1p
+    game.visitor_team_stats.offensive_rebounds = ro
+    game.visitor_team_stats.defensive_rebounds = rd
+    game.visitor_team_stats.assists = asis
+
+    return game
+    
+    
+
+        
+
