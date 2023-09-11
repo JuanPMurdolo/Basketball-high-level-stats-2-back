@@ -36,8 +36,8 @@ class TeamHistoryTrackerSchema(Schema):
     team_id = fields.Int()
     actual_team = fields.Bool()
     seasons = fields.List(fields.Str())
-    beggining_of_contract = fields.Date()
-    end_of_contract = fields.Date()
+    beggining_of_contract = fields.Str()
+    end_of_contract = fields.Str()
 
 class PlayerSchema(Schema):
     id = fields.Str(dump_only=True)
@@ -46,7 +46,7 @@ class PlayerSchema(Schema):
     historical_team_id = fields.Nested(TeamHistoryTrackerSchema)
     picture = fields.Str()
     position = fields.Str()
-    date_of_birth = fields.Date()
+    date_of_birth = fields.Str()
     games = fields.Int(default=0)
     games_started = fields.Int(default=0)
     stats = fields.Nested(StatsSchema)

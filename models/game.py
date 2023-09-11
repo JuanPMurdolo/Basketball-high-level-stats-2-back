@@ -4,7 +4,7 @@ from db import db
 class Game(db.Model):
     __tablename__ = "games"
     id = db.Column(db.String(32), primary_key=True)
-    date = db.Column(db.Date, nullable=False)
+    date = db.Column(db.String(32), nullable=False)
     local_team_id = db.Column(db.String(32), db.ForeignKey("teams.id"), nullable=False)
     visitor_team_id = db.Column(db.String(32), db.ForeignKey("teams.id"), nullable=False)
     local_team = db.relationship("Team", foreign_keys=[local_team_id])

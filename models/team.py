@@ -10,7 +10,7 @@ class Team(db.Model):
     division = db.Column(db.String(32), nullable=False)
     court = db.Column(db.String(128), nullable=False)
     alternative_court = db.Column(db.String(128), nullable=True)
-    player = db.relationship("Player", backref="team", lazy=True)
+    players = db.relationship("Player", backref="team", lazy=True)
 
     def __repr__(self):
         return f"<Team {self.name}>"
