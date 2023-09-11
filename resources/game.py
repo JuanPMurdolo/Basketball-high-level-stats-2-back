@@ -10,10 +10,10 @@ blp = Blueprint(
     "games", __name__, url_prefix="/games", description="Operations on games"
 )
 
-@blp.route("/<string:game_id>")
+@blp.route("/<int:game_id>")
 class Game(MethodView):
     @blp.response(200, GameSchema)
-    def get(self, game_id: str):
+    def get(self, game_id: int):
         try:
             #return games[game_id]
             return None
@@ -22,7 +22,7 @@ class Game(MethodView):
 
     @blp.arguments(GameSchema)
     @blp.response(200, GameSchema)
-    def put(self, game: dict, game_id: str):
+    def put(self, game: dict, game_id: int):
         try:
             #games[game_id] = game
             return game

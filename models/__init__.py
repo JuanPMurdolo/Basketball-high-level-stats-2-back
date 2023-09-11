@@ -3,3 +3,9 @@ from models.game import Game
 from models.player import Player
 from models.team import Team
 from models.tournament import Tournament
+from models.stats import Stats
+from models.game_local_players import GameLocalPlayers
+from models.game_visitor_players import GameVisitorPlayers
+from models.playerstats import PlayerStats
+from models.team_stats import TeamStats
+from models.teamhistory import TeamHistory

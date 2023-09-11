@@ -8,5 +8,3 @@ class TeamHistory(db.Model):
     actual_team = db.Column(db.Boolean)
     beggining_of_contract = db.Column(db.Date)
     end_of_contract = db.Column(db.Date)
-    # Agregar una relación para los equipos históricos del jugador
-    player = db.relationship('Player', backref=db.backref('historical_teams', lazy=True))

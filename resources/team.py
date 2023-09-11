@@ -12,10 +12,10 @@ blp = Blueprint(
     "teams", __name__, url_prefix="/teams", description="Operations on teams"
 )
 
-@blp.route("/<string:team_id>")
+@blp.route("/<int:team_id>")
 class Team(MethodView):
     @blp.response(200, TeamSchema)
-    def get(self, team_id: str):
+    def get(self, team_id: int):
         try:
             #return teams[team_id]
             return None
@@ -27,8 +27,8 @@ class Teams(MethodView):
     @blp.arguments(TeamSchema)
     @blp.response(201, TeamSchema)
     def post(self, team_data):
-        team_id = uuid.uuid4().hex
-        team = {**team_data, "id": team_id}
+        team_id = 1
+        team = TeamModel(id=team_id, **team_data)
         try:
             db.session.add(team)
             db.session.commit()

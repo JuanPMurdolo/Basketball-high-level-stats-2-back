@@ -1,15 +1,5 @@
 from marshmallow import Schema, fields, validate
 
-class TeamSchema(Schema):
-    id = fields.Str(dump_only=True)
-    name = fields.Str()
-    abbreviation = fields.Str()
-    city = fields.Str()
-    conference = fields.Str()
-    division = fields.Str()
-    court = fields.Str()
-    alternative_court = fields.Str(default="")
-
 class StatsSchema(Schema):
     id = fields.Int(dump_only=True)
     game_id = fields.Int()
@@ -62,6 +52,17 @@ class PlayerSchema(Schema):
     stats = fields.Nested(StatsSchema)
     #This will be the sum of all the stats
     all_stats = fields.Nested(StatsSchema)
+
+class TeamSchema(Schema):
+    id = fields.Str(dump_only=True)
+    name = fields.Str()
+    abbreviation = fields.Str()
+    city = fields.Str()
+    conference = fields.Str()
+    division = fields.Str()
+    court = fields.Str()
+    alternative_court = fields.Str(default="")
+    players = fields.List(fields.Nested(PlayerSchema), default=[])
 
 class GameSchema(Schema):
     id = fields.Str(dump_only=True)
