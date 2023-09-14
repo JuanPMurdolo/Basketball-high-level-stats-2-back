@@ -3,7 +3,6 @@ from db import db
 class Stats(db.Model):
     __tablename__ = "stats"
     id = db.Column(db.Integer, primary_key=True)
-    player_id = db.Column(db.Integer, db.ForeignKey("players.id"))
     game_id = db.Column(db.Integer, db.ForeignKey("games.id"))
     date = db.Column(db.Date, nullable=True)
     field_goals = db.Column(db.Integer, nullable=True)

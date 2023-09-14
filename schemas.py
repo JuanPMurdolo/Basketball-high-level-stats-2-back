@@ -64,19 +64,30 @@ class TeamSchema(Schema):
     alternative_court = fields.Str(default="")
     players = fields.List(fields.Nested(PlayerSchema), default=[])
 
-class GameSchema(Schema):
-    id = fields.Str(dump_only=True)
+class BaseGameSchema(Schema):
+    id = fields.Int(dump_only=True)
     local_team_id = fields.Int()
-    local_team_name = fields.Str()
     visitor_team_id = fields.Int()
-    visitor_team_name = fields.Str()
+    date = fields.Str()
     local_score = fields.Int()
     visitor_score = fields.Int()
-    date = fields.Date()
     season = fields.Str()
     status = fields.Str()
     postseason = fields.Bool()
     referees = fields.List(fields.Str())
+
+class ControlValuesSchema(Schema):
+    stats_control_values = fields.Dict()
+
+class BaseTournamentSchema(Schema):
+    id = fields.Str(dump_only=True)
+    name = fields.Str()
+    season = fields.Str()
+    season_type = fields.Str()
+
+class GameSchema(BaseGameSchema):
+    local_team_name = fields.Str()
+    visitor_team_name = fields.Str()
     court = fields.Str()
     local_players = fields.List(fields.Nested(PlayerSchema), max_items=12)
     local_players_stats = fields.Nested(PlayerByGameStatsSchema, max_items=12)
@@ -84,15 +95,17 @@ class GameSchema(Schema):
     visitor_players_stats = fields.Nested(PlayerByGameStatsSchema, max_items=12)
     local_team_stats = fields.Nested(StatsSchema, max_items=1)
     visitor_team_stats = fields.Nested(StatsSchema, max_items=1)
+    tournament = fields.Nested(BaseTournamentSchema)
 
-class ControlValuesSchema(Schema):
-    stats_control_values = fields.Dict()
-
-class TournamentSchema(Schema):
-    id = fields.Str(dump_only=True)
+class TournamentSchema(BaseTournamentSchema):
     games = fields.List(fields.Nested(GameSchema))
-    season = fields.Str()
-    season_type = fields.Str()
 
-class StatsSchema(Schema):
-    data = fields.Str()
+class TeamStatsSchema(Schema):
+    id = fields.Int(dump_only=True)
+    team_id = fields.Int()
+    stats_id = fields.Int()
+
+class PlayerStatsSchema(Schema):
+    id = fields.Int(dump_only=True)
+    player_id = fields.Int()
+    stats_id = fields.Int()

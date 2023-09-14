@@ -10,7 +10,6 @@ class Player(db.Model):
     historical_team_id = db.Column(db.String(64), nullable=True)
     games = db.Column(db.Integer, nullable=True)
     games_started = db.Column(db.Integer, nullable=True)
-    minutes_played = db.Column(db.Integer, nullable=True)
     # Agrega una clave foránea que haga referencia a Team
     team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
     def __repr__(self):
