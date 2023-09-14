@@ -11,6 +11,7 @@ class Team(db.Model):
     court = db.Column(db.String(128), nullable=False)
     alternative_court = db.Column(db.String(128), nullable=True)
     players = db.relationship("Player", backref="team", lazy=True)
+    stats = db.relationship("Stats", secondary="team_stats", back_populates="teams", lazy="dynamic")
 
     def __repr__(self):
         return f"<Team {self.name}>"

@@ -79,6 +79,8 @@ class BaseGameSchema(Schema):
 class GamesTesting(Schema):
     id = fields.Int(dump_only=True)
     tournament = fields.Nested("BaseTournamentSchema")
+    local_team = fields.Nested(TeamSchema)
+    visitor_team = fields.Nested(TeamSchema)
 
 class ControlValuesSchema(Schema):
     stats_control_values = fields.Dict()
@@ -112,5 +114,10 @@ class TeamStatsSchema(Schema):
 class PlayerStatsSchema(Schema):
     id = fields.Int(dump_only=True)
     player_id = fields.Int()
+    stats_id = fields.Int()
+
+class GameStatsSchema(Schema):
+    id = fields.Int(dump_only=True)
+    game_id = fields.Int()
     stats_id = fields.Int()
 

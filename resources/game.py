@@ -5,7 +5,7 @@ from flask_smorest import abort, Blueprint
 from models.player import Player as PlayerModel
 from models.team import Team as TeamModel
 from models.game import Game as GameModel
-from schemas import BaseGameSchema, GameSchema
+from schemas import BaseGameSchema, GameSchema, GamesTesting
 from .funciones import *
 from db import db
 
@@ -15,7 +15,7 @@ blp = Blueprint(
 
 @blp.route("/<int:game_id>")
 class Game(MethodView):
-    @blp.response(200, GameSchema)
+    @blp.response(200, GamesTesting)
     def get(self, game_id):
         try:
             game = Game.query.get_or_404(game_id)

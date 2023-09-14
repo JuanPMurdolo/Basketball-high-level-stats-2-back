@@ -2,9 +2,10 @@ from flask import request
 from flask.views import MethodView
 from flask_smorest import abort, Blueprint
 import sqlalchemy
-from schemas import GameSchema, GamesTesting, TournamentSchema
+from schemas import BaseGameSchema, GameSchema, GamesTesting, TournamentSchema
 from models.tournament import Tournament as TournamentModel
 from models.game import Game as GameModel
+from models.team import Team as TeamModel
 from db import db
 
 blp = Blueprint(
@@ -37,13 +38,17 @@ class Tournament(MethodView):
 
 @blp.route("/<int:tournament_id>/game")
 class Tournament(MethodView):
-    @blp.arguments(GamesTesting)
+    @blp.arguments(GameSchema)
     @blp.response(200, TournamentSchema)
     def post(self, game_info, tournament_id):
         tournament = TournamentModel.query.get_or_404(tournament_id)
         try:
             game = GameModel(**game_info)
             tournament.games.append(game)
+            local_team = TeamModel.query.get_or_404(game_info["local_team_id"])
+            visitor_team = TeamModel.query.get_or_404(game_info["visitor_team_id"])
+            game.local_team = local_team
+            game.visitor_team = visitor_team
             db.session.add(game)
             db.session.add(tournament)
             db.session.commit()

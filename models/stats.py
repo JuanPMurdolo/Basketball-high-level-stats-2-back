@@ -3,16 +3,19 @@ from db import db
 class Stats(db.Model):
     __tablename__ = "stats"
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.Date, nullable=True)
+    teams = db.relationship('Team', secondary="team_stats", back_populates='stats')
+    players = db.relationship('Player', secondary="player_stats", back_populates='stats')
+    games_local = db.relationship('Game', secondary="games_stats", back_populates='local_team_stats', overlaps="games_visitor,visitor_team_stats")
+    games_visitor = db.relationship('Game', secondary="games_stats", back_populates='visitor_team_stats', overlaps="local_team_stats")
     field_goals = db.Column(db.Integer, nullable=True)
     field_goal_attempts = db.Column(db.Integer, nullable=True)
-    free_throw_percentage = db.Column(
+    field_goal_percentage = db.Column(
         db.Float,
         nullable=True,
         default=0,
         server_default="0",
-        onupdate=lambda context: (context.current_parameters['free_throws'] + 1) /
-                                 (context.current_parameters['free_throw_attempts'] + 1) - 1
+        onupdate=lambda context: (context.current_parameters['field_goals'] + 1) /
+                                 (context.current_parameters['field_goal_attempts'] + 1) - 1
     )
     three_pointers = db.Column(db.Integer, nullable=True)
     three_point_attempts = db.Column(db.Integer, nullable=True)
