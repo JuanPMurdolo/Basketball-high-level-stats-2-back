@@ -6,7 +6,7 @@ class Stats(db.Model):
     teams = db.relationship('Team', secondary="team_stats", back_populates='stats')
     players = db.relationship('Player', secondary="player_stats", back_populates='stats')
     games_local = db.relationship('Game', secondary="games_stats", back_populates='local_team_stats', overlaps="games_visitor,visitor_team_stats")
-    games_visitor = db.relationship('Game', secondary="games_stats", back_populates='visitor_team_stats', overlaps="local_team_stats")
+    games_visitor = db.relationship('Game', secondary="games_stats", back_populates='visitor_team_stats', overlaps="games_local,local_team_stats")
     field_goals = db.Column(db.Integer, nullable=True)
     field_goal_attempts = db.Column(db.Integer, nullable=True)
     field_goal_percentage = db.Column(

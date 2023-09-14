@@ -33,9 +33,9 @@ class Teams(MethodView):
         try:
             db.session.add(team)
             db.session.commit()
-        except:
-            abort(500, message="Error al crear el equipo")
-        return None
+        except SQLAlchemyError as e:
+            db.session.rollback()  # Rollback the transaction on error
+            abort(500, message="Database error: " + str(e))
 
     @blp.arguments(TeamSchema)
     @blp.response(200, TeamSchema)
