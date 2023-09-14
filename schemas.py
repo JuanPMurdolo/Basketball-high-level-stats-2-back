@@ -66,15 +66,19 @@ class TeamSchema(Schema):
 
 class BaseGameSchema(Schema):
     id = fields.Int(dump_only=True)
-    local_team_id = fields.Int()
-    visitor_team_id = fields.Int()
-    date = fields.Str()
-    local_score = fields.Int()
-    visitor_score = fields.Int()
-    season = fields.Str()
-    status = fields.Str()
-    postseason = fields.Bool()
-    referees = fields.List(fields.Str())
+    local_team_id = fields.Int(default=1)
+    visitor_team_id = fields.Int(default=2)
+    date = fields.Str(default="2020-01-01")
+    local_score = fields.Int(default=0)
+    visitor_score = fields.Int(default=0)
+    season = fields.Str(default="2020-2021")
+    status = fields.Str(default="Final")
+    postseason = fields.Bool(default=False)
+    tournament = fields.Nested("BaseTournamentSchema")
+
+class GamesTesting(Schema):
+    id = fields.Int(dump_only=True)
+    tournament = fields.Nested("BaseTournamentSchema")
 
 class ControlValuesSchema(Schema):
     stats_control_values = fields.Dict()
@@ -109,3 +113,4 @@ class PlayerStatsSchema(Schema):
     id = fields.Int(dump_only=True)
     player_id = fields.Int()
     stats_id = fields.Int()
+

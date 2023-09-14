@@ -2,10 +2,10 @@ from db import db
 
 class Game(db.Model):
     __tablename__ = "games"
-    id = db.Column(db.String(32), primary_key=True)
-    date = db.Column(db.String(32))
-    local_team_id = db.Column(db.String(32), db.ForeignKey("teams.id"), nullable=False)
-    visitor_team_id = db.Column(db.String(32), db.ForeignKey("teams.id"), nullable=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    #date = db.Column(db.String(32), nullable=True)
+    #local_team_id = db.Column(db.String(32), db.ForeignKey("teams.id"), nullable=False)
+    #visitor_team_id = db.Column(db.String(32), db.ForeignKey("teams.id"), nullable=False)
     #local_team = db.relationship("Team", foreign_keys=[local_team_id])
     #visitor_team = db.relationship("Team", foreign_keys=[visitor_team_id])
     #local_score = db.Column(db.Integer)

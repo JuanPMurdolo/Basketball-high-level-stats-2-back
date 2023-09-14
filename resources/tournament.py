@@ -1,8 +1,10 @@
 from flask import request
 from flask.views import MethodView
 from flask_smorest import abort, Blueprint
-from schemas import GameSchema, TournamentSchema
+import sqlalchemy
+from schemas import GameSchema, GamesTesting, TournamentSchema
 from models.tournament import Tournament as TournamentModel
+from models.game import Game as GameModel
 from db import db
 
 blp = Blueprint(
@@ -33,17 +35,22 @@ class Tournament(MethodView):
         except:
             abort(500, message="Error al crear el torneo")
 
-@blp.route("/game/")
+@blp.route("/<int:tournament_id>/game")
 class Tournament(MethodView):
-    @blp.arguments(GameSchema)
-    @blp.response(200, GameSchema)
-    def post(self, game_info):
-        tournament_id = game_info["tournament_id"]
+    @blp.arguments(GamesTesting)
+    @blp.response(200, TournamentSchema)
+    def post(self, game_info, tournament_id):
         tournament = TournamentModel.query.get_or_404(tournament_id)
-        tournament.games.append(game_info)
         try:
-            db.session.save(tournament)
+            game = GameModel(**game_info)
+            tournament.games.append(game)
+            db.session.add(game)
+            db.session.add(tournament)
             db.session.commit()
             return tournament
-        except:
+        except sqlalchemy.exc.IntegrityError as e:
+            db.session.rollback()  # Rollback the transaction
+            error_message = str(e)
+            # Log the error message and potentially handle the error gracefully
+            print("Error creating game:", error_message)
             abort(500, message="Error al crear el torneo")
