@@ -2,7 +2,7 @@ from db import db
 
 class ControlValues(db.Model):
     __tablename__ = "control_values"
-    id = db.Column(db.String(32), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(64), nullable=False)
     value = db.Column(db.String(64), nullable=False)
 

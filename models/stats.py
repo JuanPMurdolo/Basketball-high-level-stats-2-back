@@ -2,11 +2,12 @@ from db import db
 
 class Stats(db.Model):
     __tablename__ = "stats"
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     teams = db.relationship('Team', secondary="team_stats", back_populates='stats')
     players = db.relationship('Player', secondary="player_stats", back_populates='stats')
     games_local = db.relationship('Game', secondary="games_stats", back_populates='local_team_stats', overlaps="games_visitor,visitor_team_stats")
     games_visitor = db.relationship('Game', secondary="games_stats", back_populates='visitor_team_stats', overlaps="games_local,local_team_stats")
+    games_played = db.Column(db.Integer)
     field_goals = db.Column(db.Integer, nullable=True)
     field_goal_attempts = db.Column(db.Integer, nullable=True)
     field_goal_percentage = db.Column(
@@ -77,7 +78,7 @@ class Stats(db.Model):
         nullable=True,
         default=0,
         server_default="0",
-        onupdate=lambda context: (context.current_parameters['points'] +
+        onupdate=lambda context: (((context.current_parameters['points'] +
                                  context.current_parameters['total_rebounds'] +
                                  context.current_parameters['assists'] +
                                  context.current_parameters['steals'] +
@@ -86,5 +87,5 @@ class Stats(db.Model):
                                  context.current_parameters['field_goals']) -
                                  (context.current_parameters['free_throw_attempts'] -
                                  context.current_parameters['free_throws']) -
-                                 context.current_parameters['turnovers']) / 1
+                                 context.current_parameters['turnovers']))+1 / context.current_parameters['games_played']+1)-1
     )

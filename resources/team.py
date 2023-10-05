@@ -129,9 +129,7 @@ class Team(MethodView):
         team.stats.append(stats)
         game.visitor_team_stats.append(stats)
         try:
-            db.session.add(game)
             db.session.add(stats)
-            db.session.add(team)
             db.session.commit()
         except SQLAlchemyError as e:
             db.session.rollback()
