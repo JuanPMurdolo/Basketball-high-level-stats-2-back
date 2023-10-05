@@ -2,6 +2,7 @@ from marshmallow import Schema, fields, validate
 
 class StatsSchema(Schema):
     id = fields.Int(dump_only=True)
+    player = fields.Nested("PlayerSchema", dump_only=True)
     game_id = fields.Int()
     date = fields.Date()
     minutes_played = fields.Int()

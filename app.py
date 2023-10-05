@@ -2,12 +2,6 @@ import os
 from flask import Flask,request
 from flask_smorest import Api, Blueprint, abort
 from flask_migrate import Migrate
-from resources.game import blp as games_blueprint
-from resources.team import blp as teams_blueprint
-from resources.tournament import blp as tournaments_blueprint
-from resources.player import blp as players_blueprint
-from resources.stats import blp as stats_blueprint
-from resources.funciones import *
 from db import db
 import models
 
@@ -28,11 +22,5 @@ def create_app(db_url=None):
     migrate = Migrate(app, db)
 
     api = Api(app)
-
-    api.register_blueprint(games_blueprint)
-    api.register_blueprint(teams_blueprint)
-    api.register_blueprint(tournaments_blueprint)
-    api.register_blueprint(players_blueprint)
-    api.register_blueprint(stats_blueprint)
 
     return app
