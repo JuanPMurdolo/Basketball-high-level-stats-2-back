@@ -4,6 +4,7 @@ from flask_smorest import Api, Blueprint, abort
 from flask_migrate import Migrate
 from db import db
 import models
+from resources.player import playersBlp
 
 def create_app(db_url=None):
     app = Flask(__name__)
@@ -22,5 +23,7 @@ def create_app(db_url=None):
     migrate = Migrate(app, db)
 
     api = Api(app)
+    api.register_blueprint(playersBlp)
+    
 
     return app
