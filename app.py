@@ -4,7 +4,6 @@ from flask_smorest import Api, Blueprint, abort
 from flask_migrate import Migrate
 from db import db
 import models
-from resources.player import playersBlp
 
 def create_app(db_url=None):
     app = Flask(__name__)
@@ -20,10 +19,10 @@ def create_app(db_url=None):
     app.config["SQLALCHEMY_DATABASE_URI"] = db_url or os.getenv("DATABASE_URL", "sqlite:///basketball.db")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)
+    
     migrate = Migrate(app, db)
 
     api = Api(app)
-    api.register_blueprint(playersBlp)
     
 
     return app
