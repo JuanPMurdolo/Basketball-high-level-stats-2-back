@@ -5,10 +5,11 @@ class Player(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
-    age = db.Column(db.Integer, nullable=False)
-    position = db.Column(db.String(80), nullable=False)
-    team_id = db.Column(db.Integer, db.ForeignKey('teams.id'), nullable=False)
-    stats = db.relationship('Stat', backref='player', lazy=True)
+    age = db.Column(db.Integer, nullable=True)
+    position = db.Column(db.String(80), nullable=True)
+    first_division = db.Column(db.Boolean, nullable=True)
+    years_active = db.Column(db.Integer, nullable=True)
+    teams = db.Column(db.String(80), nullable=True)
 
     def __repr__(self):
         return f'<Player {self.name}>'
