@@ -6,6 +6,7 @@ import os
 
 from resources.Player import blp as player_blp
 from resources.Team import blp as team_blp
+from resources.Coach import blp as coach_blp
 
 from db import db
 import models
@@ -32,5 +33,6 @@ def create_app(db_url=None):
 
     api.register_blueprint(player_blp)
     api.register_blueprint(team_blp)
+    api.register_blueprint(coach_blp)
 
     return app
