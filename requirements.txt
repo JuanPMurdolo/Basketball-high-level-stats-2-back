@@ -1,9 +1,4 @@
-flask
-flask-smorest
-python-dotenv
+fastapi
+uvicorn
 sqlalchemy
-flask-sqlalchemy
-flask-jwt-extended
-passlib
-flask-migrate
-flask-smorest
+pydantic
