@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Date, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from .database import Base
+from app.core.db import Base
 
 class BasketballStats(Base):
     __tablename__ = "basketball_stats"
@@ -15,10 +15,16 @@ class BasketballStats(Base):
     puntos = Column(Integer, default=0)
     two_pt_attempts = Column(Integer, default=0)
     two_pt_made = Column(Integer, default=0)
+    two_pt_percentage = Column(String(5), default="0.0")
     three_pt_attempts = Column(Integer, default=0)
     three_pt_made = Column(Integer, default=0)
-    fta = Column(Integer, default=0)
-    ftm = Column(Integer, default=0)
+    three_pt_percentage = Column(String(5), default="0.0")
+    total_attempts = Column(Integer, default=0)
+    total_made = Column(Integer, default=0)
+    fg_percentage = Column(String(5), default="0.0")
+    ft_attempts = Column(Integer, default=0)
+    ft_made = Column(Integer, default=0)
+    ft_percentage = Column(String(5), default="0.0")
     asistencias = Column(Integer, default=0)
     robos = Column(Integer, default=0)
     tapones = Column(Integer, default=0)

@@ -1,14 +1,14 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from datetime import date
 from typing import Optional
 
 class PlayerBase(BaseModel):
-    nombre: str
-    dorsal: Optional[int] = None
-    posicion: Optional[str] = None
-    equipo_id: Optional[int] = None
+    nombre: str = Field(..., min_length=2, max_length=40)
+    apellido: str = Field(..., min_length=2, max_length=40)
+    fecha_nacimiento: Optional[date] = None
 
 class PlayerCreate(PlayerBase):
-    pass
+    equipo_id: int = Field(..., gt=0)
 
 class PlayerOut(PlayerBase):
     id: int
